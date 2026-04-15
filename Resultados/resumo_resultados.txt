@@ -1,0 +1,13 @@
+﻿Resultados do treino EfficientNet-B2
+
+Melhor validacao: 0.8215
+Test accuracy: 0.8224
+
+Arquivos principais:
+- best_skin_lesion_efficientnet_b2_1650.pth
+- training_history.png
+- confusion_matrix.png
+- roc_curve.png
+- grad_cam_example.png
+- frequency_plot.png
+- sample_images.png
