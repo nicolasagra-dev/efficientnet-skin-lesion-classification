@@ -1,0 +1,28 @@
+venv_skincancer/
+.conda/
+__pycache__/
+*.pyc
+
+all_images/
+dataset/
+Saved_Model/
+plots/
+
+*.zip
+*.pth
+*.pt
+*.keras
+*.h5
+
+*.png
+
+.ipynb_checkpoints/
+*.ipynb
+*.pdf
+*.csv
+HAM10000_metadata
+teste2.py
+TESTE 3.py
+train.py ✅.py
+*.py
+!train_skin_lesion_classifier.py
