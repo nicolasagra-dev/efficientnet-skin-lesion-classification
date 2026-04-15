@@ -19,13 +19,9 @@ The pipeline includes:
 
 ## Baseline Reference
 
-This implementation was inspired by and used the following work as a baseline:
+This project uses as baseline the paper *An Interpretable Deep Learning Approach for Skin Cancer Categorization*, by Faysal Mahmud, Md. Mahin Mahfiz, Md. Zobayer Ibna Kabir, and Yusha Abdullah.
 
-Mahmud, F., Mahfiz, M. M., Kabir, M. Z. I., and Abdullah, Y.  
-**An Interpretable Deep Learning Approach for Skin Cancer Categorization**  
-2023 26th International Conference on Computer and Information Technology (ICCIT)
-
-Citation:
+### Citation
 
 ```bibtex
 @INPROCEEDINGS{10508527,
@@ -103,18 +99,18 @@ Current run summary:
 
 ```text
 .
-├── train_skin_lesion_classifier.py
-├── README.md
-├── LICENSE.txt
-├── Resultados/
-│   ├── resumo_resultados.txt
-│   ├── training_history.png
-│   ├── confusion_matrix.png
-│   ├── roc_curve.png
-│   ├── grad_cam_example.png
-│   ├── frequency_plot.png
-│   └── sample_images.png
-└── .gitignore
+|-- train_skin_lesion_classifier.py
+|-- README.md
+|-- LICENSE.txt
+|-- Resultados/
+|   |-- resumo_resultados.txt
+|   |-- training_history.png
+|   |-- confusion_matrix.png
+|   |-- roc_curve.png
+|   |-- grad_cam_example.png
+|   |-- frequency_plot.png
+|   `-- sample_images.png
+`-- .gitignore
 ```
 
 ## How to Run
