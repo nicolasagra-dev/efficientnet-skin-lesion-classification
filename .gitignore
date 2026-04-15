@@ -15,6 +15,9 @@ plots/
 *.h5
 
 *.png
+!Resultados/
+!Resultados/*.png
+!Resultados/*.txt
 
 .ipynb_checkpoints/
 *.ipynb

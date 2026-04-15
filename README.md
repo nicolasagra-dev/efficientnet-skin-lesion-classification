@@ -1,43 +1,130 @@
-# An Interpretable Deep Learning Approach for Skin Cancer Categorization
+# EfficientNet Skin Lesion Classification
 
-This repository contains the code and datasets used in the paper titled **"An Interpretable Deep Learning Approach for Skin Cancer Categorization"** accepted and presented at the 26th International Conference on Computer and Information Technology (ICCIT) 2023.
+This repository contains a PyTorch pipeline for multiclass skin lesion classification using the HAM10000 dataset. The project was optimized to train on an NVIDIA GeForce GTX 1650 and uses a two-stage transfer learning strategy with EfficientNet-B2, fine-tuning, test-time augmentation, and Grad-CAM visualization.
 
-**Paper Link:** [PDF](https://www.researchgate.net/publication/380199255_An_Interpretable_Deep_Learning_Approach_for_Skin_Cancer_Categorization)
+## Overview
 
-## Table of Contents
-  - [Dataset](#dataset)
-  - [Result](#result)
-  - [Citation](#citation)
+The main training script is:
+
+- `train_skin_lesion_classifier.py`
+
+The pipeline includes:
+
+- dataset preparation from HAM10000 metadata and images
+- transfer learning with EfficientNet-B2
+- two-stage training: classifier head training and backbone fine-tuning
+- early stopping and learning rate scheduling
+- test-time augmentation for evaluation
+- confusion matrix, ROC curve, training history, and Grad-CAM visualization
+
+## Baseline Reference
+
+This implementation was inspired by and used the following work as a baseline:
+
+Mahmud, F., Mahfiz, M. M., Kabir, M. Z. I., and Abdullah, Y.  
+**An Interpretable Deep Learning Approach for Skin Cancer Categorization**  
+2023 26th International Conference on Computer and Information Technology (ICCIT)
+
+Citation:
+
+```bibtex
+@INPROCEEDINGS{10508527,
+  author={Mahmud, Faysal and Mahfiz, Md. Mahin and Kabir, Md. Zobayer Ibna and Abdullah, Yusha},
+  booktitle={2023 26th International Conference on Computer and Information Technology (ICCIT)},
+  title={An Interpretable Deep Learning Approach for Skin Cancer Categorization},
+  year={2023},
+  pages={1-6},
+  doi={10.1109/ICCIT60459.2023.10508527}
+}
+```
+
+Paper link:
+
+- [ResearchGate PDF](https://www.researchgate.net/publication/380199255_An_Interpretable_Deep_Learning_Approach_for_Skin_Cancer_Categorization)
 
 ## Dataset
-We used in this paper publicly available [HAM10000](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T) Dataset
 
-## Result
-#### Model-specific Classification Report of Weighted Average
+This project uses the public HAM10000 dataset:
 
-| Models        | Accuracy   | Precision  |  Recall | F1 Score   |
-| ------------- |:-------------:| :-------------:| :-------------:| :-------------:| 
-| **XceptionNet** | **88.72%** | **0.89** | **0.89** | **0.89** |
-| EfficientNetV2S | 88.02% | 0.88 | 0.88 | 0.88 |
-| InceptionResNetV2 | 85.73% | 0.86 | 0.86 | 0.85 |
-| EfficientNetV2M | 85.02% | 0.89 | 0.89 | 0.89 |
+- [HAM10000 on Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
 
-## Citation
-If you found this code helpful please consider citing,
+## Environment
+
+Main environment used in this project:
+
+- Python with PyTorch
+- CUDA-enabled training on NVIDIA GeForce GTX 1650
+- torchvision pretrained EfficientNet backbone
+
+## Training Strategy
+
+The training pipeline was configured to improve overall accuracy while remaining compatible with a 4 GB GPU:
+
+1. Train only the classifier head for a few epochs.
+2. Unfreeze the last backbone blocks and fine-tune with a lower learning rate.
+3. Apply data augmentation during training.
+4. Use early stopping to avoid unnecessary overfitting.
+5. Use test-time augmentation during evaluation.
+
+## Results
+
+Current run summary:
+
+- Best validation accuracy: `0.8215`
+- Test accuracy: `0.8224`
+- Backbone: `EfficientNet-B2`
+- Input size: `260 x 260`
+
+### Training History
+
+![Training History](Resultados/training_history.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](Resultados/confusion_matrix.png)
+
+### ROC Curve
+
+![ROC Curve](Resultados/roc_curve.png)
+
+### Grad-CAM Example
+
+![Grad-CAM Example](Resultados/grad_cam_example.png)
+
+### Dataset Distribution
+
+![Frequency Plot](Resultados/frequency_plot.png)
+
+### Sample Images
+
+![Sample Images](Resultados/sample_images.png)
+
+## Repository Structure
+
+```text
+.
+├── train_skin_lesion_classifier.py
+├── README.md
+├── LICENSE.txt
+├── Resultados/
+│   ├── resumo_resultados.txt
+│   ├── training_history.png
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── grad_cam_example.png
+│   ├── frequency_plot.png
+│   └── sample_images.png
+└── .gitignore
 ```
-@INPROCEEDINGS{10508527,
-            author={Mahmud, Faysal and Mahfiz, Md. Mahin and Kabir, Md. Zobayer Ibna and Abdullah, Yusha},
-            booktitle={2023 26th International Conference on Computer and Information Technology (ICCIT)}, 
-            title={An Interpretable Deep Learning Approach for Skin Cancer Categorization}, 
-            year={2023},
-            volume={},
-            number={},
-            pages={1-6},
-            keywords={Deep learning;Visualization;Explainable AI;Computational modeling;Medical services;Skin;Lesions;Skin Cancer Detection;Deep Learning;Pre-trained Models;Convolutional             Neural Networks (CNN);HAM10000;Medical Imaging;Explainable Artificial Intelligence (XAI)},
-            doi={10.1109/ICCIT60459.2023.10508527}
-}
+
+## How to Run
+
+After activating your virtual environment:
+
+```powershell
+python .\train_skin_lesion_classifier.py
 ```
 
 ## License
 
-This repository is licensed under the MIT License. See the [LICENSE](https://github.com/Faysal-MD/An-Interpretable-Deep-Learning-Approach-for-Skin-Cancer-Categorization-IEEE2023/blob/main/LICENSE) file for more information.
+This project is distributed under the terms described in [LICENSE.txt](LICENSE.txt).
