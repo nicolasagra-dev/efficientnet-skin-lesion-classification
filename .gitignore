@@ -29,3 +29,5 @@ TESTE 3.py
 train.py ✅.py
 *.py
 !train_skin_lesion_classifier.py
+!skin_lesion_classifier/
+!skin_lesion_classifier/*.py

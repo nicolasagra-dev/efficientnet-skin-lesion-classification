@@ -4,9 +4,13 @@ This repository contains a PyTorch pipeline for multiclass skin lesion classific
 
 ## Overview
 
-The main training script is:
+The project now follows a modular structure. The entry point is:
 
 - `train_skin_lesion_classifier.py`
+
+This script acts as a thin launcher and delegates the full pipeline to the internal package:
+
+- `skin_lesion_classifier/`
 
 The pipeline includes:
 
@@ -16,6 +20,28 @@ The pipeline includes:
 - early stopping and learning rate scheduling
 - test-time augmentation for evaluation
 - confusion matrix, ROC curve, training history, and Grad-CAM visualization
+
+## Project Architecture
+
+The codebase was refactored into smaller modules to make the project easier to maintain, extend, and debug.
+
+- `train_skin_lesion_classifier.py`
+Entry point used to run the full training pipeline.
+
+- `skin_lesion_classifier/config.py`
+Centralizes training settings, paths, image size, learning rates, TTA, Grad-CAM flags, and model selection.
+
+- `skin_lesion_classifier/data.py`
+Handles dataset preparation, metadata loading, image path creation, transforms, custom `Dataset`, and `DataLoader` creation.
+
+- `skin_lesion_classifier/model.py`
+Defines model creation, classifier head replacement, freezing and unfreezing logic, and loss creation.
+
+- `skin_lesion_classifier/train.py`
+Contains the training loop, validation loop, TTA inference, checkpointing, evaluation, ROC generation, and end-to-end pipeline orchestration.
+
+- `skin_lesion_classifier/utils.py`
+Contains utilities for reproducibility, device configuration, plots, Grad-CAM, and general helper functions.
 
 ## Baseline Reference
 
@@ -100,6 +126,13 @@ Current run summary:
 ```text
 .
 |-- train_skin_lesion_classifier.py
+|-- skin_lesion_classifier/
+|   |-- __init__.py
+|   |-- config.py
+|   |-- data.py
+|   |-- model.py
+|   |-- train.py
+|   `-- utils.py
 |-- README.md
 |-- LICENSE.txt
 |-- Resultados/
@@ -120,6 +153,8 @@ After activating your virtual environment:
 ```powershell
 python .\train_skin_lesion_classifier.py
 ```
+
+This command still works exactly the same as before, but internally the code now runs through the modular package structure above.
 
 ## License
 
