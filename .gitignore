@@ -24,12 +24,13 @@ plots/
 *.pdf
 *.csv
 HAM10000_metadata
+DOCUMENTACAO_PESSOAL_PTBR.md
+KAGGLE_GUIDE.md
+kaggle_train.py
 teste2.py
 TESTE 3.py
 train.py ✅.py
 *.py
 !train_skin_lesion_classifier.py
-!kaggle_train.py
 !skin_lesion_classifier/
 !skin_lesion_classifier/*.py
-!KAGGLE_GUIDE.md
