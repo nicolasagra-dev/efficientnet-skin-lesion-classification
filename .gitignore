@@ -29,5 +29,7 @@ TESTE 3.py
 train.py ✅.py
 *.py
 !train_skin_lesion_classifier.py
+!kaggle_train.py
 !skin_lesion_classifier/
 !skin_lesion_classifier/*.py
+!KAGGLE_GUIDE.md
