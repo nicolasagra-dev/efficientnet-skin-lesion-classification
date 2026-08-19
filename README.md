@@ -151,6 +151,37 @@ Current run summary:
 ![Sample Images](Resultados/sample_images.png)
 
 ## Repository Structure
+# Training Results & Methodological Baseline — EfficientNet-B2
+
+## Summary of Results
+- **Validation Accuracy (Best Epoch):** 82.15% (0.8215)
+- **Isolated Test Accuracy (TTA):** **82.24% (0.8224)**
+
+---
+
+## Methodological & Training Parameters
+
+| Parameter | Configuration / Value |
+| :--- | :--- |
+| **Achieved Test Accuracy** | **82.24%** strictly measured on the holdout test set (unseen during training/validation). |
+| **Dataset Partitioning (Split)** | Stratified Holdout (70% Train / 15% Validation / 15% Test). |
+| **Reproducibility Seed** | `seed = 42` (fixed for dataset splitting, batch sampling, and PyTorch weight initialization). |
+| **Hardware & Environment** | Local training under resource constraints: NVIDIA GeForce GTX 1650 GPU (4 GB VRAM). |
+| **Model Architecture & Input** | EfficientNet-B2 pre-trained on ImageNet with input images resized to $260 \times 260$ pixels. |
+| **Training Strategy** | Two-stage Fine-Tuning (Stage 1: 5 epochs with frozen backbone; Stage 2: 15 epochs unfrozen / full fine-tuning). |
+| **Optimizer & Learning Rates** | AdamW with $\text{lr}_{\text{head}} = 1 \times 10^{-3}$, $\text{lr}_{\text{backbone}} = 1 \times 10^{-4}$, and Weight Decay $= 1 \times 10^{-4}$. |
+| **Early Stopping** | Enabled with patience of 5 epochs monitoring validation loss (`val_loss`). |
+| **Data & Test Augmentations** | Weighted Cross-Entropy Loss, Data Augmentation (random flips & rotations), and Test-Time Augmentation (TTA). |
+
+---
+
+## Generated Artifacts in this Folder
+- `confusion_matrix.png`: Normalized confusion matrix across the 7 HAM10000 classes.
+- `roc_curve.png`: Multi-class ROC curves and AUC scores per lesion category.
+- `training_history.png`: Loss and accuracy curves across training and validation epochs.
+- `grad_cam_example.png`: Visual explanation showing Grad-CAM heatmaps on test samples.
+- `frequency_plot.png`: Class distribution and imbalance profile of the HAM10000 dataset.
+- `sample_images.png`: Representative dermoscopic images for each diagnostic class.
 
 ```text
 .
